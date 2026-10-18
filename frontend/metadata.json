@@ -1,0 +1,6 @@
+{
+  "name": "AuthGuard AI — Website Security & Authentication Inspector",
+  "description": "AI-assisted website security extension interface and interactive forensic audit simulator for evaluating authentication and login page risks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

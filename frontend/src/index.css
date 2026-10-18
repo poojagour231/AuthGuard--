@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-surface: #f8f9ff;
+  --color-surface-dim: #cbdbf5;
+  --color-surface-bright: #f8f9ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #eff4ff;
+  --color-surface-container: #e5eeff;
+  --color-surface-container-high: #dce9ff;
+  --color-surface-container-highest: #d3e4fe;
+  --color-on-surface: #0b1c30;
+  --color-on-surface-variant: #444653;
+  --color-inverse-surface: #213145;
+  --color-inverse-on-surface: #eaf1ff;
+  --color-outline: #757684;
+  --color-outline-variant: #c4c5d5;
+  --color-surface-tint: #3755c3;
+
+  --color-primary: #00288e;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #1e40af;
+  --color-on-primary-container: #a8b8ff;
+  --color-inverse-primary: #b8c4ff;
+
+  --color-secondary: #565e74;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #dae2fd;
+  --color-on-secondary-container: #5c647a;
+  --color-on-secondary-fixed: #131b2e;
+  --color-on-secondary-fixed-variant: #3f465c;
+
+  --color-tertiary: #003d28;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #00563a;
+  --color-on-tertiary-container: #5bcf9e;
+  --color-tertiary-fixed: #85f8c4;
+  --color-tertiary-fixed-dim: #68dba9;
+  --color-on-tertiary-fixed: #002114;
+  --color-on-tertiary-fixed-variant: #005137;
+
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    background-color: #f8f9ff;
+    color: #0b1c30;
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom subtle scrollbars for extension popup & log containers */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #c4c5d5;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #757684;
+}

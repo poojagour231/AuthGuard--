@@ -1,0 +1,1860 @@
+import {
+  ExtensionSettings,
+  ScanHistoryRecord,
+  ScenarioId,
+  SecurityScenario,
+  WhitelistEntry,
+} from '../types/security';
+
+export const SCENARIOS: Record<ScenarioId, SecurityScenario> = {
+  low: {
+    id: 'low',
+    shortLabel: 'Low Risk (94/100)',
+    scenarioCode: 'SCENARIO A',
+    scenarioTitle: 'Validated SaaS Login',
+    domain: 'checkout.stripe-demo.com',
+    fullUrl: 'https://checkout.stripe-demo.com/v3/pay/session_9281a',
+    tabInfo: 'Active Tab · ID #1042 · TLS 1.3',
+    ipAddress: '198.51.100.42',
+    scanTimestamp: 'Today at 14:32:08 UTC',
+    protocolLabel: 'HTTPS',
+    isHttps: true,
+    riskLevel: 'LOW',
+    baseScore: 94,
+    riskBadgeText: 'Low Risk',
+    headline: 'Authentication Validated',
+    explanation:
+      'No deceptive login patterns, suspicious redirects, or credential harvesters detected.',
+    microIndicators: [
+      {
+        label: 'Form Integrity',
+        value: 'Isolated',
+        status: 'safe',
+        iconName: 'check',
+      },
+      {
+        label: 'Origin Proof',
+        value: 'Authentic',
+        status: 'safe',
+        iconName: 'verified',
+      },
+      {
+        label: 'Homograph',
+        value: 'Clean',
+        status: 'safe',
+        iconName: 'shield',
+      },
+    ],
+    vectorsSummaryText: '4 of 4 Vectors Clear',
+    telemetryDrawers: [
+      {
+        id: 'ssl',
+        title: 'SSL & Certificate Validity',
+        subtitle: 'TLS 1.3 · DigiCert High Assurance CA',
+        badgeText: 'VALID',
+        badgeStatus: 'safe',
+        iconType: 'ssl',
+        details: [
+          {
+            label: 'Subject Alt Name:',
+            value: '*.stripe-demo.com',
+            isMono: true,
+          },
+          {
+            label: 'Certificate Age:',
+            value: '412 days (Expires in 280d)',
+          },
+          {
+            label: 'Revocation Status:',
+            value: 'OCSP Stapling Valid',
+            status: 'safe',
+          },
+        ],
+      },
+      {
+        id: 'form',
+        title: 'Authentication & Form Hygiene',
+        subtitle: 'Isolated direct input · No hidden iframes',
+        badgeText: 'SECURE',
+        badgeStatus: 'safe',
+        iconType: 'form',
+        details: [
+          {
+            label: 'Action Target:',
+            value: 'https://api.stripe-demo.com/v1/tokens',
+            isMono: true,
+          },
+          {
+            label: 'Keylogger Heuristics:',
+            value: 'Zero Event Interceptions',
+            status: 'safe',
+          },
+          {
+            label: 'Autofill Protection:',
+            value: 'Standard Browser Vault Allowed',
+          },
+        ],
+      },
+      {
+        id: 'domain',
+        title: 'Domain Reputation & Typosquatting',
+        subtitle: 'Established 12+ yrs · No Punycode attack',
+        badgeText: 'CLEAN',
+        badgeStatus: 'safe',
+        iconType: 'domain',
+        details: [
+          {
+            label: 'Unicode Analysis:',
+            value: 'ASCII Standard (No Homoglyphs)',
+          },
+          {
+            label: 'WHOIS Maturity:',
+            value: '4,526 days recorded (MarkMonitor)',
+          },
+          {
+            label: 'Threat Intelligence:',
+            value: '0/88 Feeds Reported',
+            status: 'safe',
+          },
+        ],
+      },
+      {
+        id: 'scripts',
+        title: 'Script & Payload Context',
+        subtitle: '4 External scripts · Subresource Integrity ON',
+        badgeText: '4 ACTIVE',
+        badgeStatus: 'neutral',
+        iconType: 'scripts',
+        details: [
+          {
+            label: 'js.stripe-demo.com/v3',
+            value: 'OFFICIAL',
+            isMono: true,
+            status: 'safe',
+          },
+          {
+            label: 'cdn.segment.com/analytics.js',
+            value: 'SRI HASH',
+            isMono: true,
+            status: 'neutral',
+          },
+          {
+            label: 'static.cloudflareinsights.com',
+            value: 'TELEMETRY',
+            isMono: true,
+            status: 'neutral',
+          },
+        ],
+      },
+    ],
+    popupNotice: {
+      title: 'AuthGuard Protocol Notice:',
+      body: 'This audit provides client-side UX simulation for verification workflows (DEMO DATA). It does not replace full automated cryptographic assertion or perimeter gateway monitoring.',
+      tone: 'neutral',
+    },
+    reportHero: {
+      certBadge: 'EV CERTIFICATE',
+      originId: 'ORIGIN ID: STRIPE-DEMO-US-EAST',
+      summary:
+        'Cryptographic handshake verified via TLS 1.3 protocol. High-fidelity financial checkout environment isolation detected with zero untrusted inline scripts or credential-harvesting triggers.',
+    },
+    executiveSummary: {
+      confidence: '98.2%',
+      consensus: 'Unanimous (8/8)',
+      authPassedLabel: '4/4 PASSED',
+      authHeadline: 'Zero Leakage',
+      authDescription:
+        'All password & payment inputs operate inside audited cryptographic sandboxes.',
+      tokenExchange: 'RFC-8705 mTLS',
+      frameIsolation: 'Cross-Origin Clean',
+      provenanceTier: 'TIER 1 TRUST',
+      domainAgeHeadline: '12.4 Years',
+      domainAgeDescription:
+        'Mature registrar history with zero flagged ownership churns or drop-catches.',
+      dnssecStatus: 'Strict Signed',
+      certificateType: 'DigiCert EV SHA-2',
+      scriptRiskLabel: 'MINIMAL',
+      scriptsAudited: '6 Audited',
+      scriptsVerified: '/ 6 Verified',
+      scriptsDescription:
+        '100% of runtime scripts adhere strictly to CSP & Subresource Integrity hashes.',
+      sriHashes: 'All SHA-384 Matched',
+      evalUsage: 'Blocked by Policy',
+    },
+    sslSection: {
+      gradeBadge: 'GRADE A+',
+      protocol: 'TLS 1.3 (RFC 8446)',
+      replayProtection: '0-RTT Anti-Replay Active',
+      cipherSuite: 'TLS_AES_256_GCM_SHA384',
+      keyExchange: '256-bit Ephemeral Key Exchange',
+      issuingAuthority: 'DigiCert Global Root G2',
+      serialNumber: 'Serial: 0B:7A:12:F4:98:C1:22:90',
+      validityWindow: '280 Days Remaining',
+      expiryDetail: 'Expires Jul 18, 2027 · OCSP Stapled',
+      trustChain: {
+        rootCa: 'DigiCert High Assurance EV Root CA',
+        intermediateCa: 'DigiCert SHA2 Extended Validation Server CA',
+        leafDomain: 'checkout.stripe-demo.com',
+        leafStatus: 'Leaf Verified',
+      },
+    },
+    formAuditFields: [
+      {
+        index: 1,
+        selector: '#card-number',
+        scopeBadge: 'PCI-DSS Scope',
+        description: 'Target frame:',
+        codeTarget: '__privateStripeFrame491 (Origin Sandboxed)',
+        statusLabel: 'No Keylogger Hooks',
+        badgeText: 'ISOLATED',
+        status: 'safe',
+      },
+      {
+        index: 2,
+        selector: '#cvv',
+        scopeBadge: 'CVV/CVC Token',
+        description: 'DOM Memory Zeroing enabled · Autocomplete masked',
+        statusLabel: 'Encrypted Keystroke',
+        badgeText: 'PROTECTED',
+        status: 'safe',
+      },
+      {
+        index: 3,
+        selector: '#auth-token',
+        scopeBadge: 'Session Handshake',
+        description: 'Ephemeral bearer token with Strict-SameSite cookie anchor',
+        statusLabel: 'HTTPOnly Injected',
+        badgeText: 'SAFE',
+        status: 'safe',
+      },
+    ],
+    domainHeuristics: {
+      anomaliesBadge: '0 ANOMALIES',
+      punycodeTitle: 'ASCII Strict',
+      punycodeDesc:
+        'No Cyrillic/Greek character replacements detected. Decodes directly to exact ASCII representation.',
+      levenshteinTitle: 'Distance 0',
+      levenshteinDesc:
+        'Target precisely matches registered brand mark without character displacement.',
+      brandMatchTarget: 'stripe-demo.com',
+      whoisTitle: 'MarkMonitor Verified',
+      whoisDesc:
+        'Institutional corporate registrar record with enterprise lock and zero registrar transfers.',
+    },
+    networkEndpoints: [
+      {
+        url: 'https://api.stripe-demo.com/v1/tokens',
+        method: 'POST',
+        originScope: 'First-Party API',
+        corsHeader: 'Strict Same-Origin',
+        integrityBadge: 'SHA-384',
+        status: 'safe',
+      },
+      {
+        url: 'https://m.stripe-demo.com/4/elements.js',
+        method: 'GET',
+        originScope: 'Whitelisted CDN',
+        corsHeader: 'Access-Control-Allow',
+        integrityBadge: 'SRI Pass',
+        status: 'safe',
+      },
+      {
+        url: 'https://r.stripe-demo.com/b',
+        method: 'POST',
+        originScope: 'Fraud Beacon',
+        corsHeader: 'Credentials Excluded',
+        integrityBadge: 'TLS 1.3',
+        status: 'safe',
+      },
+      {
+        url: 'https://q.stripe-demo.com/healthcheck',
+        method: 'GET',
+        originScope: 'Telemetry Ping',
+        corsHeader: 'No Cookies',
+        integrityBadge: 'Verified',
+        status: 'safe',
+      },
+    ],
+    assessmentChecklist: [
+      {
+        title: 'Legitimate Checkout Host:',
+        detail:
+          'Host matches the authorized payment processing network with verifiable root pinning.',
+        status: 'safe',
+      },
+      {
+        title: 'Zero Malicious Event Handlers:',
+        detail:
+          'Zero unvetted keydown or copy/paste listeners detected on credential inputs.',
+        status: 'safe',
+      },
+      {
+        title: 'Strict CSP Enforced:',
+        detail:
+          'Unsafe-inline execution is completely disallowed by parent header directive.',
+        status: 'safe',
+      },
+      {
+        title: 'No Known Exfiltration Sinks:',
+        detail:
+          'WebRTC and raw WebSocket pipelines are inactive in checkout iframe scope.',
+        status: 'safe',
+      },
+    ],
+    recommendedActions: [
+      {
+        title: 'Safe to proceed with payment',
+        detail:
+          'The current origin maintains valid institutional certification and strict card data sandboxing.',
+        status: 'safe',
+      },
+      {
+        title: 'Autofill credentials safely',
+        detail:
+          'Standard browser password manager and vault extensions can populate fields without leakage risk.',
+        status: 'safe',
+      },
+      {
+        title: 'Report anomalous overlays',
+        detail:
+          'If external modal dialogs request credentials outside this checkout viewport, trigger a manual rescan.',
+        status: 'neutral',
+      },
+    ],
+    auditMetadata: {
+      sessionId: 'AG-98421-202610',
+      inspectorCore: 'AuthGuard Chromium Hook',
+      latency: '14.2 ms (Simulated)',
+      signature: 'ed25519:8e03..4fa1',
+    },
+    simulator: {
+      overlayTitle: 'AuthGuard: Verified Institution',
+      overlayDesc:
+        'Authentic cryptographic lineage verified against Stripe Payments Demo UK Ltd.',
+      overlayActionText: 'Inspection Details',
+      mockBrandInitial: 'S',
+      mockHeader: 'Stripe Checkout',
+      mockInvoiceOrRef: 'Invoice #82910',
+      mockField1Label: 'Account or Email',
+      mockField1Value: 'developer@authguard-eval.io',
+      mockField1Badge: 'DOM-Guarded',
+      mockField2Label: 'Payment Method & Authorization (Demo Input)',
+      mockField2Badge: 'iFrame Isolated',
+      mockSubmitText: 'Authorize & Continue ($120.00)',
+      weights: {
+        origin: 98,
+        ssl: 100,
+        dom: 92,
+        script: 88,
+      },
+      logs: [
+        {
+          time: '[10:42:01.09]',
+          text: 'INITIALIZE: Handshake completed with checkout.stripe-demo.com',
+          tone: 'safe',
+        },
+        {
+          time: '[10:42:01.12]',
+          text: 'CERT_VERIFY: DigiCert EV SHA256 valid. No CRL revokes.',
+          tone: 'neutral',
+        },
+        {
+          time: '[10:42:01.24]',
+          text: 'DOM_INSPECT: 2 input fields bounded by Stripe iFrame sandbox.',
+          tone: 'neutral',
+        },
+        {
+          time: '[10:42:01.30]',
+          text: 'EVAL_COMPLETE: Trust score evaluated at 94. Green badge issued.',
+          tone: 'primary',
+        },
+      ],
+    },
+  },
+
+  medium: {
+    id: 'medium',
+    shortLabel: 'Medium Risk (58/100)',
+    scenarioCode: 'SCENARIO B',
+    scenarioTitle: 'Ambiguous Payment Gateway',
+    domain: 'pay-invoice-portal.net',
+    fullUrl: 'https://pay-invoice-portal.net/invoices/99201?redirect_auth=external',
+    tabInfo: 'Active Tab · ID #1042 · TLS 1.2',
+    ipAddress: '203.0.113.88',
+    scanTimestamp: 'Today at 12:18:44 UTC',
+    protocolLabel: 'TLS 1.2',
+    isHttps: true,
+    riskLevel: 'MEDIUM',
+    baseScore: 58,
+    riskBadgeText: 'Medium Risk · Suspicious Signals',
+    headline: 'Caution Advised Before Authentication',
+    explanation:
+      'Unusual redirection detected and newly registered domain with unverified origin credentials.',
+    microIndicators: [
+      {
+        label: 'Form Integrity',
+        value: 'Unsigned Form',
+        status: 'caution',
+        iconName: 'warning',
+      },
+      {
+        label: 'Origin Proof',
+        value: 'New (<30d)',
+        status: 'caution',
+        iconName: 'warning',
+      },
+      {
+        label: 'Homograph',
+        value: 'Clean Glyphs',
+        status: 'safe',
+        iconName: 'check',
+      },
+    ],
+    vectorsSummaryText: '3 of 4 Vectors Flagged',
+    telemetryDrawers: [
+      {
+        id: 'ssl',
+        title: 'SSL & Certificate Validity',
+        subtitle: "TLS 1.2 · Let's Encrypt Authority",
+        badgeText: 'ACCEPTABLE',
+        badgeStatus: 'neutral',
+        iconType: 'ssl',
+        details: [
+          {
+            label: 'Issuer:',
+            value: "R3 / Let's Encrypt Free CA",
+            isMono: true,
+          },
+          {
+            label: 'Certificate Age:',
+            value: '14 days (Expires in 76d)',
+            status: 'caution',
+          },
+          {
+            label: 'Security Cipher:',
+            value: 'ECDHE-RSA-AES128-GCM-SHA256',
+          },
+        ],
+      },
+      {
+        id: 'form',
+        title: 'Authentication & Form Hygiene',
+        subtitle: 'Form points to 3rd-party host: api-track.biz',
+        badgeText: 'FLAGGED',
+        badgeStatus: 'caution',
+        iconType: 'form',
+        details: [
+          {
+            label: 'Form Action URL:',
+            value: 'https://api-track.biz/v1/auth',
+            isMono: true,
+            status: 'danger',
+          },
+          {
+            label: 'Cross-Origin Post:',
+            value: 'Detected (Different eTLD+1)',
+            status: 'caution',
+          },
+          {
+            label: 'Credential Target:',
+            value: 'Password field without CSRF hash',
+            status: 'caution',
+          },
+        ],
+      },
+      {
+        id: 'domain',
+        title: 'Domain Reputation & Typosquatting',
+        subtitle: 'Registered 18 days ago · Privacy WHOIS',
+        badgeText: 'SUSPICIOUS',
+        badgeStatus: 'caution',
+        iconType: 'domain',
+        details: [
+          {
+            label: 'Registration Date:',
+            value: '18 days ago (High turnover registrar)',
+            status: 'caution',
+          },
+          {
+            label: 'WHOIS Privacy:',
+            value: 'Withheld for Privacy Guard Ltd',
+          },
+          {
+            label: 'Typosquat Target:',
+            value: 'Generic billing portal naming pattern',
+          },
+        ],
+      },
+      {
+        id: 'scripts',
+        title: 'Script & Payload Context',
+        subtitle: '1 Unsigned cross-origin script',
+        badgeText: 'CAUTION',
+        badgeStatus: 'caution',
+        iconType: 'scripts',
+        details: [
+          {
+            label: 'collect-gate.top/bundle.min.js',
+            value: 'NO SRI HASH',
+            isMono: true,
+            status: 'caution',
+          },
+          {
+            label: 'cdnjs.cloudflare.com/ajax/libs',
+            value: 'KNOWN CDN',
+            isMono: true,
+            status: 'safe',
+          },
+        ],
+      },
+    ],
+    popupNotice: {
+      title: 'Warning:',
+      body: 'This page attempts to transmit login credentials to an external destination not matching its base domain. Confirm legitimate invoice source before entry. (DEMO DATA)',
+      tone: 'caution',
+    },
+    reportHero: {
+      certBadge: 'DV CERTIFICATE (90-DAY)',
+      originId: 'ORIGIN ID: UNVERIFIED-CLOUD-PROXY',
+      summary:
+        'Domain uses standard Domain-Validated (DV) encryption but exhibits newly registered WHOIS antiquity (18 days) and cross-origin form submission toward an unverified third-party endpoint.',
+    },
+    executiveSummary: {
+      confidence: '89.5%',
+      consensus: 'Caution (5/8 Flagged)',
+      authPassedLabel: '2/4 FLAGGED',
+      authHeadline: 'Cross-Origin Post',
+      authDescription:
+        'Login form action targets external domain api-track.biz without frame sandboxing.',
+      tokenExchange: 'Unverified Bearer',
+      frameIsolation: 'Shared DOM Context',
+      provenanceTier: 'UNVERIFIED ORIGIN',
+      domainAgeHeadline: '18 Days',
+      domainAgeDescription:
+        'Recently registered domain with redacted WHOIS ownership and no prior reputation history.',
+      dnssecStatus: 'Unsigned Zone',
+      certificateType: "Let's Encrypt R3 DV",
+      scriptRiskLabel: 'ELEVATED',
+      scriptsAudited: '3 Audited',
+      scriptsVerified: '/ 2 Verified',
+      scriptsDescription:
+        '1 external script loaded from collect-gate.top lacks Subresource Integrity (SRI) verification.',
+      sriHashes: '1 Missing SRI Hash',
+      evalUsage: 'Dynamic Function() Present',
+    },
+    sslSection: {
+      gradeBadge: 'GRADE B',
+      protocol: 'TLS 1.2 (RFC 5246)',
+      replayProtection: 'Standard Handshake (No 0-RTT)',
+      cipherSuite: 'ECDHE_RSA_WITH_AES_128_GCM_SHA256',
+      keyExchange: '128-bit RSA Key Exchange',
+      issuingAuthority: "Let's Encrypt Authority R3",
+      serialNumber: 'Serial: 04:91:AC:82:11:E0:49:1B',
+      validityWindow: '76 Days Remaining',
+      expiryDetail: 'Issued 14 days ago · Automated DV',
+      trustChain: {
+        rootCa: 'ISRG Root X1',
+        intermediateCa: "Let's Encrypt R3 Intermediate",
+        leafDomain: 'pay-invoice-portal.net',
+        leafStatus: 'DV Only (No Org Identity)',
+      },
+    },
+    formAuditFields: [
+      {
+        index: 1,
+        selector: '#account-email',
+        scopeBadge: 'User Identifier',
+        description: 'Submits via external POST action:',
+        codeTarget: 'https://api-track.biz/v1/auth',
+        statusLabel: 'Cross-Origin Target',
+        badgeText: 'CAUTION',
+        status: 'caution',
+      },
+      {
+        index: 2,
+        selector: '#login-password',
+        scopeBadge: 'Credential Field',
+        description: 'Direct DOM input without CSRF token or sandboxed iframe',
+        statusLabel: 'Unsigned Form',
+        badgeText: 'FLAGGED',
+        status: 'caution',
+      },
+      {
+        index: 3,
+        selector: '#invoice-reference',
+        scopeBadge: 'Hidden Input',
+        description: 'Populated dynamically from URL query string parameters',
+        statusLabel: 'Query Injected',
+        badgeText: 'MONITORED',
+        status: 'caution',
+      },
+    ],
+    domainHeuristics: {
+      anomaliesBadge: '2 CAUTIONS',
+      punycodeTitle: 'ASCII Clean',
+      punycodeDesc:
+        'No non-Latin Unicode homoglyphs detected in domain label.',
+      levenshteinTitle: 'Generic Pattern',
+      levenshteinDesc:
+        'Uses high-frequency hyphenated billing keywords common in grey-market invoice portals.',
+      brandMatchTarget: 'pay-invoice-portal.net',
+      whoisTitle: 'Privacy Guard Redacted',
+      whoisDesc:
+        'Registered 18 days ago via bulk registrar. Organization identity is masked behind privacy proxy.',
+    },
+    networkEndpoints: [
+      {
+        url: 'https://api-track.biz/v1/auth',
+        method: 'POST',
+        originScope: 'External 3rd-Party',
+        corsHeader: 'Access-Control-Allow: *',
+        integrityBadge: 'Cross-Origin',
+        status: 'caution',
+      },
+      {
+        url: 'https://collect-gate.top/bundle.min.js',
+        method: 'GET',
+        originScope: 'Unverified Script Host',
+        corsHeader: 'No-CORS',
+        integrityBadge: 'Missing SRI',
+        status: 'caution',
+      },
+      {
+        url: 'https://cdnjs.cloudflare.com/ajax/libs',
+        method: 'GET',
+        originScope: 'Public CDN',
+        corsHeader: 'Strict-Origin',
+        integrityBadge: 'SRI Pass',
+        status: 'safe',
+      },
+    ],
+    assessmentChecklist: [
+      {
+        title: 'Newly Registered Domain (18 Days):',
+        detail:
+          'Domain lacks historical reputation and uses privacy-redacted WHOIS registration.',
+        status: 'caution',
+      },
+      {
+        title: 'Cross-Origin Form Action:',
+        detail:
+          'Authentication form submits data to api-track.biz rather than pay-invoice-portal.net.',
+        status: 'caution',
+      },
+      {
+        title: 'Unsigned External Script:',
+        detail:
+          'One third-party JavaScript bundle executes without Subresource Integrity (SRI) pinning.',
+        status: 'caution',
+      },
+      {
+        title: 'Valid Basic HTTPS Encryption:',
+        detail:
+          'Transport layer is encrypted via TLS 1.2, but DV certificate does not verify organization legitimacy.',
+        status: 'safe',
+      },
+    ],
+    recommendedActions: [
+      {
+        title: 'Do not use browser autofill yet',
+        detail:
+          'Avoid auto-populating saved corporate passwords until you independently verify the sender of this invoice link.',
+        status: 'caution',
+      },
+      {
+        title: 'Verify invoice origin out-of-band',
+        detail:
+          'Contact the billing vendor through a known official phone number or main corporate domain before paying.',
+        status: 'caution',
+      },
+      {
+        title: 'Whitelist temporarily only if trusted',
+        detail:
+          'If this is an internal contractor portal you recognize, you may apply a 24-hour domain exception.',
+        status: 'neutral',
+      },
+    ],
+    auditMetadata: {
+      sessionId: 'AG-98422-202610',
+      inspectorCore: 'AuthGuard Chromium Hook',
+      latency: '18.6 ms (Simulated)',
+      signature: 'ed25519:4c91..9b20',
+    },
+    simulator: {
+      overlayTitle: 'AuthGuard: Ambiguous Origin Warning',
+      overlayDesc:
+        'Newly minted domain (registered 18d ago). Cross-origin form target & unsigned script active.',
+      overlayActionText: 'Inspect Redirect Chains',
+      mockBrandInitial: 'F',
+      mockHeader: 'FastPay Invoice Gateway',
+      mockInvoiceOrRef: 'Invoice #99201',
+      mockField1Label: 'Billing Email Address',
+      mockField1Value: 'accounts@enterprise-client.org',
+      mockField1Badge: 'Unsigned Script',
+      mockField2Label: 'Portal Password / PIN (Demo Input)',
+      mockField2Badge: 'Cross-Origin Action',
+      mockSubmitText: 'Proceed to Payment (Unverified)',
+      weights: {
+        origin: 44,
+        ssl: 80,
+        dom: 60,
+        script: 48,
+      },
+      logs: [
+        {
+          time: '[10:43:10.02]',
+          text: 'INITIALIZE: Origin pay-invoice-portal.net loaded via TLS 1.2',
+          tone: 'neutral',
+        },
+        {
+          time: '[10:43:10.15]',
+          text: 'WHOIS_FLAG: Registration antiquity is 18 days. Elevated risk modifier +20.',
+          tone: 'caution',
+        },
+        {
+          time: '[10:43:10.28]',
+          text: 'FORM_WARN: Form action points to external host api-track.biz/v1/auth.',
+          tone: 'caution',
+        },
+        {
+          time: '[10:43:10.33]',
+          text: 'EVAL_COMPLETE: Trust score depressed to 58. Amber caution badge triggered.',
+          tone: 'caution',
+        },
+      ],
+    },
+  },
+
+  high: {
+    id: 'high',
+    shortLabel: 'High Risk (18/100)',
+    scenarioCode: 'SCENARIO C',
+    scenarioTitle: 'Deceptive Phishing Intercept',
+    domain: 'secure-apple-id-verify.login-sync.cc',
+    fullUrl: 'http://secure-apple-id-verify.login-sync.cc/auth/step1',
+    tabInfo: 'Active Tab · Untrusted SSL · 48h Old',
+    ipAddress: '185.199.108.153',
+    scanTimestamp: 'Today at 14:20:11 UTC',
+    protocolLabel: 'HTTP',
+    isHttps: false,
+    riskLevel: 'HIGH',
+    baseScore: 18,
+    riskBadgeText: 'High Risk · Dangerous Website',
+    headline: 'Deceptive Login Pattern Detected',
+    explanation:
+      'This site exhibits deceptive visual mimicking and active credential capture heuristics matching known phishing vectors.',
+    microIndicators: [
+      {
+        label: 'Form Guard',
+        value: 'Intercepted',
+        status: 'danger',
+        iconName: 'danger',
+      },
+      {
+        label: 'Brand Match',
+        value: 'Impersonation',
+        status: 'danger',
+        iconName: 'report',
+      },
+      {
+        label: 'Domain Age',
+        value: '48 Hours',
+        status: 'danger',
+        iconName: 'clock',
+      },
+    ],
+    vectorsSummaryText: '3 High-Severity Flags',
+    criticalViolations: [
+      {
+        id: 'harvester',
+        title: 'Credential Harvester Detected',
+        badgeText: 'EXFILTRATION',
+        badgeTone: 'solid',
+        description:
+          'Password input is bound to an unauthorized third-party endpoint (sync-api.cc/relay) bypassing regular authentication mechanisms.',
+        iconType: 'key_off',
+        technicalEvidence:
+          'DOM listener input[type="password"].onkeyup dispatches base64 payload to wss://sync-api.cc/relay.',
+      },
+      {
+        id: 'spoof',
+        title: 'Homograph & Lookalike Spoof',
+        badgeText: 'SPOOF',
+        badgeTone: 'tinted',
+        description:
+          'Lookalike subdomains configured to mimic authentic Apple ID login prompts with falsified SSL branding metadata.',
+        iconType: 'spoof',
+        technicalEvidence:
+          'Subdomain token "secure-apple-id-verify" impersonates apple.com on unrelated TLD (.login-sync.cc).',
+      },
+      {
+        id: 'untrusted',
+        title: 'Zero Origin Trust (New Domain)',
+        badgeText: 'UNTRUSTED',
+        badgeTone: 'tinted',
+        description:
+          'Domain registered within the last 48 hours without WHOIS validation history or established certificate transparency logs.',
+        iconType: 'untrusted',
+        technicalEvidence:
+          'First seen in passive DNS 41 hours ago; unencrypted HTTP fallback active on login route.',
+      },
+    ],
+    telemetryDrawers: [
+      {
+        id: 'ssl',
+        title: 'SSL & Certificate Validity',
+        subtitle: 'Unencrypted HTTP / Self-Signed Fallback',
+        badgeText: 'UNTRUSTED',
+        badgeStatus: 'danger',
+        iconType: 'ssl',
+        details: [
+          {
+            label: 'Transport Security:',
+            value: 'Plaintext HTTP / Invalid Cert Chain',
+            status: 'danger',
+          },
+          {
+            label: 'Certificate Age:',
+            value: '41 hours (No CT Log Anchor)',
+            status: 'danger',
+          },
+          {
+            label: 'HSTS Policy:',
+            value: 'Missing Strict-Transport-Security',
+            status: 'danger',
+          },
+        ],
+      },
+      {
+        id: 'form',
+        title: 'Authentication & Form Hygiene',
+        subtitle: 'Keyup listener & third-party relay detected',
+        badgeText: 'COMPROMISED',
+        badgeStatus: 'danger',
+        iconType: 'form',
+        details: [
+          {
+            label: 'Exfiltration Target:',
+            value: 'https://sync-api.cc/relay/harvest.php',
+            isMono: true,
+            status: 'danger',
+          },
+          {
+            label: 'Keystroke Listener:',
+            value: 'Active on #apple-id-password',
+            status: 'danger',
+          },
+          {
+            label: 'Autofill Guard:',
+            value: 'Browser Vault Advisory Triggered',
+            status: 'danger',
+          },
+        ],
+      },
+      {
+        id: 'domain',
+        title: 'Domain Reputation & Typosquatting',
+        subtitle: 'Brand impersonation · 48h old registration',
+        badgeText: 'MALICIOUS',
+        badgeStatus: 'danger',
+        iconType: 'domain',
+        details: [
+          {
+            label: 'Spoofed Brand:',
+            value: 'Apple ID / iCloud Authentication',
+            status: 'danger',
+          },
+          {
+            label: 'WHOIS Age:',
+            value: '2 days (48 hours recorded)',
+            status: 'danger',
+          },
+          {
+            label: 'Threat Feeds:',
+            value: 'Flagged by 14 Phishing Heuristics',
+            status: 'danger',
+          },
+        ],
+      },
+      {
+        id: 'scripts',
+        title: 'Script & Payload Context',
+        subtitle: 'Obfuscated inline keylogger & WebSocket relay',
+        badgeText: 'HIGH RISK',
+        badgeStatus: 'danger',
+        iconType: 'scripts',
+        details: [
+          {
+            label: 'sync-api.cc/relay/hook.obf.js',
+            value: 'EXFILTRATION',
+            isMono: true,
+            status: 'danger',
+          },
+          {
+            label: 'inline-eval-packer-v2.js',
+            value: 'OBFUSCATED',
+            isMono: true,
+            status: 'danger',
+          },
+        ],
+      },
+    ],
+    popupNotice: {
+      title: 'DEMO DATA:',
+      body: 'Simulated threat indicators for UX evaluation. Real background blocking or forced tab termination is not active in this prototype session.',
+      tone: 'danger',
+    },
+    reportHero: {
+      certBadge: 'UNTRUSTED / HTTP',
+      originId: 'ORIGIN ID: FLAGGED-PHISH-HOST',
+      summary:
+        'Critical phishing pattern detected. The inspected page impersonates an institutional login portal on a 48-hour-old domain while binding keystroke exfiltration listeners to credential fields.',
+    },
+    executiveSummary: {
+      confidence: '99.4%',
+      consensus: 'Critical Alert (8/8 Flagged)',
+      authPassedLabel: '0/4 PASSED',
+      authHeadline: 'Active Harvester',
+      authDescription:
+        'Password and OTP inputs attach unvetted keyup listeners transmitting to sync-api.cc.',
+      tokenExchange: 'None (Plaintext POST)',
+      frameIsolation: 'Spoofed Modal Overlay',
+      provenanceTier: 'HIGH RISK ORIGIN',
+      domainAgeHeadline: '48 Hours',
+      domainAgeDescription:
+        'Ephemeral domain registered 2 days ago with deceptive brand keywords in subdomain.',
+      dnssecStatus: 'Unsigned / Fast-Flux',
+      certificateType: 'None / Untrusted HTTP',
+      scriptRiskLabel: 'CRITICAL',
+      scriptsAudited: '4 Audited',
+      scriptsVerified: '/ 0 Verified',
+      scriptsDescription:
+        'Obfuscated JavaScript uses eval() unpacking and binds directly to password DOM nodes.',
+      sriHashes: '0% SRI Coverage',
+      evalUsage: 'Active Obfuscated Eval()',
+    },
+    sslSection: {
+      gradeBadge: 'GRADE F',
+      protocol: 'HTTP/1.1 (Unencrypted / Self-Signed)',
+      replayProtection: 'None — Vulnerable to MITM Interception',
+      cipherSuite: 'NONE / TLS_FALLBACK_UNVERIFIED',
+      keyExchange: 'No Verifiable Institutional Key Exchange',
+      issuingAuthority: 'Unverified / Self-Issued Fallback',
+      serialNumber: 'Serial: FF:00:99:12:AA:41:00:11',
+      validityWindow: 'Untrusted Origin',
+      expiryDetail: 'No Certificate Transparency Pinning',
+      trustChain: {
+        rootCa: 'Unanchored Root Authority',
+        intermediateCa: 'None (Direct Untrusted Leaf)',
+        leafDomain: 'secure-apple-id-verify.login-sync.cc',
+        leafStatus: 'Impersonation Flagged',
+      },
+    },
+    formAuditFields: [
+      {
+        index: 1,
+        selector: '#apple-id-input',
+        scopeBadge: 'Spoofed Identifier',
+        description: 'Mimics official login UI on unauthorized domain:',
+        codeTarget: 'login-sync.cc',
+        statusLabel: 'Brand Impersonation',
+        badgeText: 'SPOOFED',
+        status: 'danger',
+      },
+      {
+        index: 2,
+        selector: '#password-field',
+        scopeBadge: 'Credential Exfiltration',
+        description: 'Attached onkeyup listener forwards buffer to sync-api.cc/relay',
+        statusLabel: 'Keylogger Hook Active',
+        badgeText: 'CRITICAL',
+        status: 'danger',
+      },
+      {
+        index: 3,
+        selector: '#2fa-code-input',
+        scopeBadge: 'OTP Phishing',
+        description: 'Real-time relay script attempts session token hijacking',
+        statusLabel: 'Relay Intercept',
+        badgeText: 'DANGER',
+        status: 'danger',
+      },
+    ],
+    domainHeuristics: {
+      anomaliesBadge: '3 CRITICAL FLAGS',
+      punycodeTitle: 'Homoglyph / Subdomain Spoof',
+      punycodeDesc:
+        'Uses deceptive "secure-apple-id-verify" prefix on unrelated root domain login-sync.cc (and Cyrillic "а" in variant URLs).',
+      levenshteinTitle: 'High Impersonation Risk',
+      levenshteinDesc:
+        'Visual layout, favicon, and subdomain tokens intentionally mimic official authentication portals.',
+      brandMatchTarget: 'apple.com (Spoofed)',
+      whoisTitle: 'Anonymous Ephemeral Host',
+      whoisDesc:
+        'Registered 48 hours ago on bulletproof hosting infrastructure with fast-flux DNS TTLs.',
+    },
+    networkEndpoints: [
+      {
+        url: 'https://sync-api.cc/relay/harvest.php',
+        method: 'POST',
+        originScope: 'Known Exfiltration Sink',
+        corsHeader: 'Access-Control-Allow: *',
+        integrityBadge: 'Exfiltration',
+        status: 'danger',
+      },
+      {
+        url: 'wss://sync-api.cc/live-keystroke-stream',
+        method: 'POST',
+        originScope: 'WebSocket Relay',
+        corsHeader: 'Unrestricted',
+        integrityBadge: 'Keystroke Sink',
+        status: 'danger',
+      },
+      {
+        url: 'http://secure-apple-id-verify.login-sync.cc/assets/obf.js',
+        method: 'GET',
+        originScope: 'Obfuscated Packer',
+        corsHeader: 'Plaintext HTTP',
+        integrityBadge: 'Untrusted',
+        status: 'danger',
+      },
+    ],
+    assessmentChecklist: [
+      {
+        title: 'Credential Exfiltration Endpoint:',
+        detail:
+          'Form submission and keystroke events are routed to an external collection server (sync-api.cc).',
+        status: 'danger',
+      },
+      {
+        title: 'Deceptive Brand Impersonation:',
+        detail:
+          'Subdomain string and page DOM clone a well-known identity provider on an unrelated top-level domain.',
+        status: 'danger',
+      },
+      {
+        title: 'Ephemeral 48-Hour Domain:',
+        detail:
+          'Domain was registered less than 2 days ago and lacks valid organizational SSL certification.',
+        status: 'danger',
+      },
+      {
+        title: 'Obfuscated DOM Event Hooks:',
+        detail:
+          'Inline scripts attach listeners directly to password and 2FA input elements.',
+        status: 'danger',
+      },
+    ],
+    recommendedActions: [
+      {
+        title: 'Leave this page immediately (Back to Safety)',
+        detail:
+          'Do not enter any username, password, or verification code. Navigate back to a known safe page.',
+        status: 'danger',
+      },
+      {
+        title: 'Never enter OTPs or recovery phrases here',
+        detail:
+          'Real-time relay scripts on deceptive login pages can capture one-time passcodes if submitted.',
+        status: 'danger',
+      },
+      {
+        title: 'Navigate directly via official bookmark',
+        detail:
+          'Always access your account by typing the official root domain directly into your browser address bar.',
+        status: 'neutral',
+      },
+    ],
+    auditMetadata: {
+      sessionId: 'AG-98423-202610',
+      inspectorCore: 'AuthGuard Chromium Hook',
+      latency: '11.4 ms (Simulated)',
+      signature: 'ed25519:9f12..0e77',
+    },
+    simulator: {
+      overlayTitle: 'CRITICAL: Credential Harvest Risk Detected',
+      overlayDesc:
+        'Detected lookalike domain & Cyrillic homograph spoof. Active input listener flagged!',
+      overlayActionText: 'Return to Safe Origin',
+      mockBrandInitial: '!',
+      mockHeader: 'Account Security Sync (Spoofed Demo)',
+      mockInvoiceOrRef: 'Session #ERR-409',
+      mockField1Label: 'Account ID / Email',
+      mockField1Value: 'user@example-corporate.com',
+      mockField1Badge: 'Exfiltration Hook DETECTED',
+      mockField2Label: 'Password Field (Simulated — Do Not Enter Real Data)',
+      mockField2Badge: 'Lookalike Spoof',
+      mockSubmitText: 'WARNING: High-Risk Submission Target',
+      weights: {
+        origin: 10,
+        ssl: 32,
+        dom: 12,
+        script: 8,
+      },
+      logs: [
+        {
+          time: '[10:44:05.10]',
+          text: 'ANOMALY: Subdomain & homograph spoof detected on login-sync.cc',
+          tone: 'danger',
+        },
+        {
+          time: '[10:44:05.14]',
+          text: 'HOMOGRAPH_FLAG: Levenshtein & brand token analysis indicates impersonation.',
+          tone: 'danger',
+        },
+        {
+          time: '[10:44:05.22]',
+          text: 'INPUT_LISTEN: Script attaches keyup handlers to input[type=password]',
+          tone: 'danger',
+        },
+        {
+          time: '[10:44:05.29]',
+          text: 'FORM_ACTION: Post target points to remote endpoint: sync-api.cc/relay',
+          tone: 'danger',
+        },
+        {
+          time: '[10:44:05.35]',
+          text: 'EVAL_COMPLETE: Critical risk score: 18/100. High-Risk warning displayed.',
+          tone: 'danger',
+        },
+      ],
+    },
+  },
+
+  cloudvault: {
+    id: 'cloudvault',
+    shortLabel: 'Low Risk (96/100)',
+    scenarioCode: 'ARCHIVE #4',
+    scenarioTitle: 'Enterprise SecOps Workspace',
+    domain: 'app.secure-cloudvault.io',
+    fullUrl: 'https://app.secure-cloudvault.io/workspaces/secops',
+    tabInfo: 'Active Tab · ID #1042 · TLS 1.3',
+    ipAddress: '198.51.100.19',
+    scanTimestamp: 'Yesterday at 19:15:22 UTC',
+    protocolLabel: 'HTTPS',
+    isHttps: true,
+    riskLevel: 'LOW',
+    baseScore: 96,
+    riskBadgeText: 'Low Risk',
+    headline: 'Enterprise SSO Origin Verified',
+    explanation:
+      'Hardware-backed WebAuthn handshake and HSTS preload policy verified with zero cross-origin leakage.',
+    microIndicators: [
+      {
+        label: 'Form Integrity',
+        value: 'Isolated',
+        status: 'safe',
+        iconName: 'check',
+      },
+      {
+        label: 'Origin Proof',
+        value: 'Authentic',
+        status: 'safe',
+        iconName: 'verified',
+      },
+      {
+        label: 'Homograph',
+        value: 'Clean',
+        status: 'safe',
+        iconName: 'shield',
+      },
+    ],
+    vectorsSummaryText: '4 of 4 Vectors Clear',
+    telemetryDrawers: [
+      {
+        id: 'ssl',
+        title: 'SSL & Certificate Validity',
+        subtitle: 'TLS 1.3 · DigiCert High Assurance CA',
+        badgeText: 'VALID',
+        badgeStatus: 'safe',
+        iconType: 'ssl',
+        details: [
+          {
+            label: 'Subject Alt Name:',
+            value: '*.secure-cloudvault.io',
+            isMono: true,
+          },
+          {
+            label: 'Certificate Age:',
+            value: '412 days (Expires in 218d)',
+          },
+          {
+            label: 'Revocation Status:',
+            value: 'OCSP Stapling Valid',
+            status: 'safe',
+          },
+        ],
+      },
+      {
+        id: 'form',
+        title: 'Authentication & Form Hygiene',
+        subtitle: 'WebAuthn FIDO2 + Isolated direct input',
+        badgeText: 'SECURE',
+        badgeStatus: 'safe',
+        iconType: 'form',
+        details: [
+          {
+            label: 'Action Target:',
+            value: '/api/v2/auth/session',
+            isMono: true,
+          },
+          {
+            label: 'Keylogger Heuristics:',
+            value: 'Zero Event Interceptions',
+            status: 'safe',
+          },
+          {
+            label: 'Autofill Protection:',
+            value: 'Standard Browser Vault Allowed',
+          },
+        ],
+      },
+      {
+        id: 'domain',
+        title: 'Domain Reputation & Typosquatting',
+        subtitle: 'Established 3+ yrs · HSTS Preloaded',
+        badgeText: 'CLEAN',
+        badgeStatus: 'safe',
+        iconType: 'domain',
+        details: [
+          {
+            label: 'Unicode Analysis:',
+            value: 'ASCII Standard (No Homoglyphs)',
+          },
+          {
+            label: 'WHOIS Maturity:',
+            value: '1,248 days recorded',
+          },
+          {
+            label: 'Threat Intelligence:',
+            value: '0/88 Feeds Reported',
+            status: 'safe',
+          },
+        ],
+      },
+      {
+        id: 'scripts',
+        title: 'Script & Payload Context',
+        subtitle: '2 First-party bundles · Strict SRI ON',
+        badgeText: '2 ACTIVE',
+        badgeStatus: 'safe',
+        iconType: 'scripts',
+        details: [
+          {
+            label: 'app.secure-cloudvault.io/main.js',
+            value: 'SRI HASH',
+            isMono: true,
+            status: 'safe',
+          },
+          {
+            label: 'auth.secure-cloudvault.io/fido2.js',
+            value: 'OFFICIAL',
+            isMono: true,
+            status: 'safe',
+          },
+        ],
+      },
+    ],
+    popupNotice: {
+      title: 'AuthGuard Protocol Notice:',
+      body: 'Simulated audit snapshot for app.secure-cloudvault.io (DEMO DATA).',
+      tone: 'neutral',
+    },
+    reportHero: {
+      certBadge: 'HSTS PRELOAD + EV',
+      originId: 'ORIGIN ID: CLOUDVAULT-SECOPS-01',
+      summary:
+        'Enterprise cloud workspace protected by FIDO2/WebAuthn credential binding, HSTS preload pinning, and strict first-party script execution policies.',
+    },
+    executiveSummary: {
+      confidence: '99.1%',
+      consensus: 'Unanimous (8/8)',
+      authPassedLabel: '4/4 PASSED',
+      authHeadline: 'FIDO2 Bound',
+      authDescription:
+        'Session authentication uses origin-bound cryptographic challenge-response tokens.',
+      tokenExchange: 'WebAuthn Level 2',
+      frameIsolation: 'X-Frame-Options: DENY',
+      provenanceTier: 'TIER 1 TRUST',
+      domainAgeHeadline: '3.4 Years',
+      domainAgeDescription:
+        'Verified enterprise domain with DNSSEC CAA pinning and zero registrar disputes.',
+      dnssecStatus: 'Strict Signed + CAA',
+      certificateType: 'DigiCert TLS 1.3 SHA-384',
+      scriptRiskLabel: 'MINIMAL',
+      scriptsAudited: '2 Audited',
+      scriptsVerified: '/ 2 Verified',
+      scriptsDescription:
+        'Zero third-party trackers; all bundles verified via SHA-384 Subresource Integrity.',
+      sriHashes: 'All SHA-384 Matched',
+      evalUsage: 'Disallowed via CSP',
+    },
+    sslSection: {
+      gradeBadge: 'GRADE A+',
+      protocol: 'TLS 1.3 (RFC 8446)',
+      replayProtection: 'Strict HSTS Preload Enabled',
+      cipherSuite: 'TLS_AES_256_GCM_SHA384',
+      keyExchange: 'ECDHE P-384 Ephemeral Key Exchange',
+      issuingAuthority: 'DigiCert High Assurance CA',
+      serialNumber: 'Serial: 09:1A:44:C2:77:B1:08:19',
+      validityWindow: '218 Days Remaining',
+      expiryDetail: 'OCSP Stapling Active · CT Logged',
+      trustChain: {
+        rootCa: 'DigiCert Global Root G2',
+        intermediateCa: 'DigiCert High Assurance TLS Hybrid CA',
+        leafDomain: 'app.secure-cloudvault.io',
+        leafStatus: 'Leaf Verified',
+      },
+    },
+    formAuditFields: [
+      {
+        index: 1,
+        selector: '#sso-work-email',
+        scopeBadge: 'Enterprise ID',
+        description: 'Same-origin POST endpoint:',
+        codeTarget: '/api/v2/auth/session',
+        statusLabel: 'First-Party Only',
+        badgeText: 'ISOLATED',
+        status: 'safe',
+      },
+      {
+        index: 2,
+        selector: '#webauthn-passkey',
+        scopeBadge: 'Hardware Token',
+        description: 'Hardware security key challenge bound to exact origin',
+        statusLabel: 'Phishing Resistant',
+        badgeText: 'PROTECTED',
+        status: 'safe',
+      },
+    ],
+    domainHeuristics: {
+      anomaliesBadge: '0 ANOMALIES',
+      punycodeTitle: 'ASCII Strict',
+      punycodeDesc: 'Pure ASCII domain labels with zero homoglyph substitutions.',
+      levenshteinTitle: 'Distance 0',
+      levenshteinDesc: 'Canonical enterprise domain verified in local policy store.',
+      brandMatchTarget: 'secure-cloudvault.io',
+      whoisTitle: 'CloudVault Security Inc.',
+      whoisDesc: 'Verified corporate registrant with registrar transfer lock enabled.',
+    },
+    networkEndpoints: [
+      {
+        url: 'https://app.secure-cloudvault.io/api/v2/auth/session',
+        method: 'POST',
+        originScope: 'First-Party API',
+        corsHeader: 'Same-Origin Only',
+        integrityBadge: 'SHA-384',
+        status: 'safe',
+      },
+      {
+        url: 'https://auth.secure-cloudvault.io/fido2/assertion',
+        method: 'POST',
+        originScope: 'WebAuthn Service',
+        corsHeader: 'Strict Same-Site',
+        integrityBadge: 'mTLS Verified',
+        status: 'safe',
+      },
+    ],
+    assessmentChecklist: [
+      {
+        title: 'Hardware-Backed Passkey Support:',
+        detail: 'Supports FIDO2/WebAuthn assertion resistant to relay phishing.',
+        status: 'safe',
+      },
+      {
+        title: 'Strict Content Security Policy:',
+        detail: 'Blocks inline scripts and restricts connect-src to first-party APIs.',
+        status: 'safe',
+      },
+    ],
+    recommendedActions: [
+      {
+        title: 'Safe for enterprise authentication',
+        detail: 'Proceed with standard SSO or hardware security key sign-in.',
+        status: 'safe',
+      },
+    ],
+    auditMetadata: {
+      sessionId: 'AG-98410-202610',
+      inspectorCore: 'AuthGuard Chromium Hook',
+      latency: '12.1 ms (Simulated)',
+      signature: 'ed25519:3a81..7c12',
+    },
+    simulator: {
+      overlayTitle: 'AuthGuard: Enterprise Origin Verified',
+      overlayDesc: 'HSTS Preload and FIDO2 WebAuthn binding verified.',
+      overlayActionText: 'Inspection Details',
+      mockBrandInitial: 'C',
+      mockHeader: 'CloudVault SecOps SSO',
+      mockInvoiceOrRef: 'Workspace #SECOPS',
+      mockField1Label: 'Corporate SSO Email',
+      mockField1Value: 'secops@cloudvault.io',
+      mockField1Badge: 'DOM-Guarded',
+      mockField2Label: 'Hardware Passkey / Token (Demo Input)',
+      mockField2Badge: 'WebAuthn Bound',
+      mockSubmitText: 'Authenticate with Passkey',
+      weights: { origin: 99, ssl: 100, dom: 95, script: 92 },
+      logs: [
+        {
+          time: '[19:15:01.04]',
+          text: 'INITIALIZE: HSTS Preload verified for app.secure-cloudvault.io',
+          tone: 'safe',
+        },
+        {
+          time: '[19:15:01.18]',
+          text: 'EVAL_COMPLETE: Trust score evaluated at 96/100.',
+          tone: 'primary',
+        },
+      ],
+    },
+  },
+
+  cryptowallet: {
+    id: 'cryptowallet',
+    shortLabel: 'High Risk (12/100)',
+    scenarioCode: 'ARCHIVE #5',
+    scenarioTitle: 'Malicious Seed Phrase Drainer',
+    domain: 'crypto-wallet-airdrop-claim.xyz',
+    fullUrl: 'https://crypto-wallet-airdrop-claim.xyz/connect-web3',
+    tabInfo: 'Active Tab · Unverified SSL · Blacklisted',
+    ipAddress: '192.0.2.199',
+    scanTimestamp: 'Yesterday at 16:40:05 UTC',
+    protocolLabel: 'Unverified SSL',
+    isHttps: false,
+    riskLevel: 'HIGH',
+    baseScore: 12,
+    riskBadgeText: 'High Risk · Malicious Drainer',
+    headline: 'Seed Phrase Sniffer Detected',
+    explanation:
+      'Page requests 12/24-word recovery phrases via an unencrypted web form connected to a known C2 exfiltration host.',
+    microIndicators: [
+      {
+        label: 'Form Guard',
+        value: 'Seed Sniffer',
+        status: 'danger',
+        iconName: 'danger',
+      },
+      {
+        label: 'Brand Match',
+        value: 'Fake Airdrop',
+        status: 'danger',
+        iconName: 'report',
+      },
+      {
+        label: 'Domain Age',
+        value: '19 Hours',
+        status: 'danger',
+        iconName: 'clock',
+      },
+    ],
+    vectorsSummaryText: '4 High-Severity Flags',
+    criticalViolations: [
+      {
+        id: 'seed-sniffer',
+        title: 'Mnemonic Seed Phrase Harvester',
+        badgeText: 'CRITICAL',
+        badgeTone: 'solid',
+        description:
+          'Textarea input pattern matches BIP-39 12/24-word recovery phrase validation with immediate background POST exfiltration.',
+        iconType: 'key_off',
+        technicalEvidence:
+          'Regex listener checks for 12/24 space-delimited words and posts to hxxps://c2-drain-node.ru/collect.',
+      },
+      {
+        id: 'c2-blacklist',
+        title: 'Known Threat Feed Blacklist Match',
+        badgeText: 'BLACKLISTED',
+        badgeTone: 'tinted',
+        description:
+          'Domain and IP block appear on 22 phishing & wallet-drainer threat intelligence blocklists.',
+        iconType: 'untrusted',
+        technicalEvidence: 'Matched in OpenPhish & CertStream Newly Registered Suspicious TLD (.xyz).',
+      },
+    ],
+    telemetryDrawers: [
+      {
+        id: 'ssl',
+        title: 'SSL & Certificate Validity',
+        subtitle: 'Self-signed / Mismatched SAN Certificate',
+        badgeText: 'INVALID',
+        badgeStatus: 'danger',
+        iconType: 'ssl',
+        details: [
+          {
+            label: 'SAN Mismatch:',
+            value: 'Issued for *.parking-host.xyz',
+            status: 'danger',
+          },
+        ],
+      },
+    ],
+    popupNotice: {
+      title: 'DEMO DATA:',
+      body: 'Simulated high-risk wallet drainer scenario for security education.',
+      tone: 'danger',
+    },
+    reportHero: {
+      certBadge: 'MISMATCHED SSL',
+      originId: 'ORIGIN ID: C2-WALLET-DRAINER',
+      summary:
+        'Critical threat detected. This domain solicits cryptographic recovery phrases and injects malicious Web3 provider overrides.',
+    },
+    executiveSummary: {
+      confidence: '99.8%',
+      consensus: 'Critical Alert (8/8 Flagged)',
+      authPassedLabel: '0/4 PASSED',
+      authHeadline: 'Seed Sniffer',
+      authDescription: 'Detects BIP-39 mnemonic input fields designed to steal private keys.',
+      tokenExchange: 'Exfiltration POST',
+      frameIsolation: 'Hijacked window.ethereum',
+      provenanceTier: 'BLACKLISTED',
+      domainAgeHeadline: '19 Hours',
+      domainAgeDescription: 'Ephemeral .xyz domain registered less than 1 day ago.',
+      dnssecStatus: 'Unsigned',
+      certificateType: 'Invalid / Mismatched SAN',
+      scriptRiskLabel: 'CRITICAL',
+      scriptsAudited: '5 Audited',
+      scriptsVerified: '/ 0 Verified',
+      scriptsDescription: 'Heavily obfuscated wallet drainer script detected.',
+      sriHashes: 'None',
+      evalUsage: 'Active String.fromCharCode Eval',
+    },
+    sslSection: {
+      gradeBadge: 'GRADE F',
+      protocol: 'TLS 1.2 (Mismatched Subject Name)',
+      replayProtection: 'None',
+      cipherSuite: 'TLS_RSA_WITH_AES_128_CBC_SHA',
+      keyExchange: 'Static RSA (No Forward Secrecy)',
+      issuingAuthority: 'Unverified Self-Signed Issuer',
+      serialNumber: 'Serial: 00:DE:AD:BE:EF:11:22:33',
+      validityWindow: 'Invalid Hostname Match',
+      expiryDetail: 'Certificate does not match crypto-wallet-airdrop-claim.xyz',
+      trustChain: {
+        rootCa: 'Untrusted Root',
+        intermediateCa: 'None',
+        leafDomain: 'crypto-wallet-airdrop-claim.xyz',
+        leafStatus: 'Hostname Mismatch',
+      },
+    },
+    formAuditFields: [
+      {
+        index: 1,
+        selector: '#mnemonic-phrase-input',
+        scopeBadge: 'BIP-39 Seed Trap',
+        description: 'Exfiltrates recovery words on input change to:',
+        codeTarget: 'c2-drain-node.ru/collect',
+        statusLabel: 'Active Seed Harvester',
+        badgeText: 'CRITICAL',
+        status: 'danger',
+      },
+    ],
+    domainHeuristics: {
+      anomaliesBadge: '4 CRITICAL FLAGS',
+      punycodeTitle: 'High-Risk TLD (.xyz)',
+      punycodeDesc: 'Combines bait keywords ("crypto", "wallet", "airdrop", "claim").',
+      levenshteinTitle: 'Bait Keyword Cluster',
+      levenshteinDesc: 'Matches known social-engineering lure templates.',
+      brandMatchTarget: 'Web3 Wallet Providers',
+      whoisTitle: 'Redacted Ephemeral',
+      whoisDesc: 'Registered 19 hours ago; already reported across 22 threat feeds.',
+    },
+    networkEndpoints: [
+      {
+        url: 'https://c2-drain-node.ru/collect',
+        method: 'POST',
+        originScope: 'Malicious C2 Server',
+        corsHeader: 'Wildcard *',
+        integrityBadge: 'Exfiltration',
+        status: 'danger',
+      },
+    ],
+    assessmentChecklist: [
+      {
+        title: 'BIP-39 Seed Phrase Input Trap:',
+        detail: 'Legitimate dApps never ask users to type their 12 or 24 recovery words into a webpage.',
+        status: 'danger',
+      },
+      {
+        title: 'Known C2 Exfiltration Endpoint:',
+        detail: 'Form data is immediately transmitted to an external command-and-control server.',
+        status: 'danger',
+      },
+    ],
+    recommendedActions: [
+      {
+        title: 'Never type your recovery phrase on any website',
+        detail: 'Close or leave this page immediately. Hardware and browser wallets never validate via web forms.',
+        status: 'danger',
+      },
+    ],
+    auditMetadata: {
+      sessionId: 'AG-98409-202610',
+      inspectorCore: 'AuthGuard Chromium Hook',
+      latency: '9.8 ms (Simulated)',
+      signature: 'ed25519:7d01..2a99',
+    },
+    simulator: {
+      overlayTitle: 'CRITICAL: Seed Phrase Sniffer Detected',
+      overlayDesc: 'Malicious Web3 drainer script attempting to harvest recovery words.',
+      overlayActionText: 'Return to Safe Origin',
+      mockBrandInitial: 'W',
+      mockHeader: 'Web3 Airdrop Claim Portal (Demo Trap)',
+      mockInvoiceOrRef: 'Claim #AIRDROP',
+      mockField1Label: 'Wallet Address',
+      mockField1Value: '0x71C...89A2',
+      mockField1Badge: 'Provider Hijack',
+      mockField2Label: 'Recovery Phrase Trap (Simulated — Never Enter Seed Words)',
+      mockField2Badge: 'Seed Sniffer Active',
+      mockSubmitText: 'WARNING: Malicious Drainer Endpoint',
+      weights: { origin: 5, ssl: 20, dom: 8, script: 4 },
+      logs: [
+        {
+          time: '[16:40:05.11]',
+          text: 'CRITICAL: BIP-39 mnemonic input field detected in DOM.',
+          tone: 'danger',
+        },
+      ],
+    },
+  },
+
+  github: {
+    id: 'github',
+    shortLabel: 'Low Risk (98/100)',
+    scenarioCode: 'ARCHIVE #6',
+    scenarioTitle: 'Verified Developer Platform',
+    domain: 'github.com/organization/repo',
+    fullUrl: 'https://github.com/organization/repo/security/policy',
+    tabInfo: 'Active Tab · ID #1042 · TLS 1.3',
+    ipAddress: '140.82.121.4',
+    scanTimestamp: '2 days ago at 09:12:30 UTC',
+    protocolLabel: 'HTTPS',
+    isHttps: true,
+    riskLevel: 'LOW',
+    baseScore: 98,
+    riskBadgeText: 'Low Risk',
+    headline: 'Verified Institutional Platform',
+    explanation:
+      'Established global developer platform with strict CSP, HSTS preload, and hardware WebAuthn support.',
+    microIndicators: [
+      {
+        label: 'Form Integrity',
+        value: 'Strict CSP',
+        status: 'safe',
+        iconName: 'check',
+      },
+      {
+        label: 'Origin Proof',
+        value: 'Verified Org',
+        status: 'safe',
+        iconName: 'verified',
+      },
+      {
+        label: 'Homograph',
+        value: 'Clean',
+        status: 'safe',
+        iconName: 'shield',
+      },
+    ],
+    vectorsSummaryText: '4 of 4 Vectors Clear',
+    telemetryDrawers: [
+      {
+        id: 'ssl',
+        title: 'SSL & Certificate Validity',
+        subtitle: 'TLS 1.3 · DigiCert High Assurance CA',
+        badgeText: 'VALID',
+        badgeStatus: 'safe',
+        iconType: 'ssl',
+        details: [
+          {
+            label: 'Subject Alt Name:',
+            value: 'github.com, *.github.com',
+            isMono: true,
+          },
+        ],
+      },
+    ],
+    popupNotice: {
+      title: 'AuthGuard Protocol Notice:',
+      body: 'Simulated audit snapshot for github.com (DEMO DATA).',
+      tone: 'neutral',
+    },
+    reportHero: {
+      certBadge: 'VERIFIED ORGANIZATION',
+      originId: 'ORIGIN ID: GITHUB-CORE-US',
+      summary:
+        'Top-tier domain reputation (18+ years), strict Content-Security-Policy enforcement, and hardware passkey authentication.',
+    },
+    executiveSummary: {
+      confidence: '99.7%',
+      consensus: 'Unanimous (8/8)',
+      authPassedLabel: '4/4 PASSED',
+      authHeadline: 'Passkey Ready',
+      authDescription: 'All session and login forms enforce strict CSRF and WebAuthn standards.',
+      tokenExchange: 'Strict-SameSite Cookie',
+      frameIsolation: 'X-Frame-Options: DENY',
+      provenanceTier: 'TIER 1 TRUST',
+      domainAgeHeadline: '18.2 Years',
+      domainAgeDescription: 'Globally established root domain with MarkMonitor enterprise lock.',
+      dnssecStatus: 'Signed + CAA',
+      certificateType: 'DigiCert ECC P-256',
+      scriptRiskLabel: 'MINIMAL',
+      scriptsAudited: '4 Audited',
+      scriptsVerified: '/ 4 Verified',
+      scriptsDescription: 'All script bundles use strict SHA-512 Subresource Integrity.',
+      sriHashes: '100% SHA-512 Matched',
+      evalUsage: 'Blocked by CSP',
+    },
+    sslSection: {
+      gradeBadge: 'GRADE A+',
+      protocol: 'TLS 1.3 (RFC 8446)',
+      replayProtection: 'HSTS Preload + OCSP Stapled',
+      cipherSuite: 'TLS_AES_128_GCM_SHA256',
+      keyExchange: 'X25519 Ephemeral Key Exchange',
+      issuingAuthority: 'DigiCert TLS Hybrid ECC SHA384 2020 CA1',
+      serialNumber: 'Serial: 0E:23:89:A1:11:7C:40:02',
+      validityWindow: '310 Days Remaining',
+      expiryDetail: 'Valid Institutional Certificate',
+      trustChain: {
+        rootCa: 'DigiCert Global Root CA',
+        intermediateCa: 'DigiCert TLS Hybrid ECC SHA384 CA1',
+        leafDomain: 'github.com',
+        leafStatus: 'Leaf Verified',
+      },
+    },
+    formAuditFields: [
+      {
+        index: 1,
+        selector: '#login_field',
+        scopeBadge: 'First-Party Auth',
+        description: 'Submits directly to canonical session endpoint:',
+        codeTarget: 'https://github.com/session',
+        statusLabel: 'CSRF Token Verified',
+        badgeText: 'ISOLATED',
+        status: 'safe',
+      },
+    ],
+    domainHeuristics: {
+      anomaliesBadge: '0 ANOMALIES',
+      punycodeTitle: 'ASCII Strict',
+      punycodeDesc: 'Canonical ASCII hostname with zero homoglyph characters.',
+      levenshteinTitle: 'Distance 0',
+      levenshteinDesc: 'Exact match against primary global brand registry.',
+      brandMatchTarget: 'github.com',
+      whoisTitle: 'MarkMonitor Enterprise',
+      whoisDesc: 'Hardware registry lock active against unauthorized transfers.',
+    },
+    networkEndpoints: [
+      {
+        url: 'https://github.com/session',
+        method: 'POST',
+        originScope: 'First-Party Auth',
+        corsHeader: 'Strict Same-Origin',
+        integrityBadge: 'SHA-512',
+        status: 'safe',
+      },
+      {
+        url: 'https://github.githubassets.com/assets/main.js',
+        method: 'GET',
+        originScope: 'First-Party CDN',
+        corsHeader: 'Access-Control-Allow',
+        integrityBadge: 'SRI Pass',
+        status: 'safe',
+      },
+    ],
+    assessmentChecklist: [
+      {
+        title: 'Established Global Origin:',
+        detail: '18+ years of continuous WHOIS and Certificate Transparency history.',
+        status: 'safe',
+      },
+      {
+        title: 'Zero Third-Party Script Injection:',
+        detail: 'Strict CSP blocks all unauthorized inline or external script execution.',
+        status: 'safe',
+      },
+    ],
+    recommendedActions: [
+      {
+        title: 'Safe to authenticate',
+        detail: 'Origin passes all cryptographic and DOM hygiene checks.',
+        status: 'safe',
+      },
+    ],
+    auditMetadata: {
+      sessionId: 'AG-98401-202610',
+      inspectorCore: 'AuthGuard Chromium Hook',
+      latency: '10.5 ms (Simulated)',
+      signature: 'ed25519:1b44..8c01',
+    },
+    simulator: {
+      overlayTitle: 'AuthGuard: Verified Developer Platform',
+      overlayDesc: 'Strict CSP and SHA-512 Subresource Integrity verified.',
+      overlayActionText: 'Inspection Details',
+      mockBrandInitial: 'G',
+      mockHeader: 'GitHub Enterprise Sign In',
+      mockInvoiceOrRef: 'Org: secops-core',
+      mockField1Label: 'Username or email address',
+      mockField1Value: 'maintainer@authguard.dev',
+      mockField1Badge: 'CSRF Guarded',
+      mockField2Label: 'Password / Passkey (Demo Input)',
+      mockField2Badge: 'Strict CSP',
+      mockSubmitText: 'Sign in to GitHub',
+      weights: { origin: 100, ssl: 100, dom: 96, script: 96 },
+      logs: [
+        {
+          time: '[09:12:30.05]',
+          text: 'EVAL_COMPLETE: Trust score evaluated at 98/100.',
+          tone: 'primary',
+        },
+      ],
+    },
+  },
+};
+
+export const INITIAL_SCAN_HISTORY: ScanHistoryRecord[] = [];
+
+
+export const INITIAL_WHITELIST: WhitelistEntry[] = [
+  {
+    id: 'wl-1',
+    domainPattern: 'identity.internal.corp',
+    scope: 'Corporate SSO Gateway',
+    addedBy: 'Admin Provisioned',
+    verified: true,
+  },
+  {
+    id: 'wl-2',
+    domainPattern: '*.staging-vpn.authguard.internal',
+    scope: 'Dev Staging Enclaves',
+    addedBy: 'Policy Rule #41',
+    verified: true,
+  },
+  {
+    id: 'wl-3',
+    domainPattern: 'auth.localdev:8443',
+    scope: 'Local Mock Server',
+    addedBy: 'Manual User Entry',
+    verified: false,
+  },
+  {
+    id: 'wl-4',
+    domainPattern: 'vault.corp.net',
+    scope: 'Hardware Token Portal',
+    addedBy: 'Manual User Entry',
+    verified: false,
+  },
+];
+
+export const DEFAULT_SETTINGS: ExtensionSettings = {
+  heuristicDomAnalysis: true,
+  punycodeDetection: true,
+  formActionWarning: true,
+  sensitivityPreset: 'balanced',
+  localDiagnosticJournaling: true,
+  retentionDays: '30',
+  watermarkLocked: true,
+  defaultDemoScenario: 'cycle',
+  blockUnverifiedTracking: true,
+  autoFlagOverlays: true,
+  protectionPausedUntil: null,
+};
